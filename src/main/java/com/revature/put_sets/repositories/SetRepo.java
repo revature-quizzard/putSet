@@ -1,7 +1,8 @@
-package com.revature.put_sets;
+package com.revature.put_sets.repositories;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.revature.put_sets.models.Set;
 
 public class SetRepo {
 

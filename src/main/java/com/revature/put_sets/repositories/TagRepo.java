@@ -1,8 +1,8 @@
-package com.revature.put_sets;
+package com.revature.put_sets.repositories;
 
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.revature.put_sets.Tag;
+import com.revature.put_sets.models.Tag;
 
 import java.util.ArrayList;
 import java.util.List;
