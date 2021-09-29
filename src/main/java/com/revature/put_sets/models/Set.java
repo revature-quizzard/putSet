@@ -13,7 +13,7 @@ import java.util.List;
 public class Set {
 
     private String id;
-    private String name;
+    private String set_name;
     private List<Tag> tags;
     private String author;
     private boolean is_public;
@@ -31,13 +31,13 @@ public class Set {
         this.id = id;
     }
 
-    @DynamoDbAttribute("name")
-    public String getName() {
-        return name;
+    @DynamoDbAttribute("set_name")
+    public String getSet_name() {
+        return set_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSet_name(String set_name) {
+        this.set_name = set_name;
     }
 
     @DynamoDbAttribute("tags")

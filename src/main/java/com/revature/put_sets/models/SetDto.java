@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 public class SetDto {
 
-    private String name;
+    private String set_name;
     private List<String> tags;
     private boolean is_public;
 

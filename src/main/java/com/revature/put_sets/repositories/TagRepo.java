@@ -30,7 +30,7 @@ public class TagRepo {
      * @return A list of tags from the model whose names matched tagNames.
      */
     public List<Tag> findTags(List<String> tagNames) {
-        List<Tag> tagQuery = tagNames.stream().map(Tag::new).collect(Collectors.toList());
+        List<Tag> tagQuery = tagNames.stream().map(e -> (new Tag(e))).collect(Collectors.toList());
         List<Tag> result = new ArrayList<>();
 
         for(Tag t : tagQuery) {

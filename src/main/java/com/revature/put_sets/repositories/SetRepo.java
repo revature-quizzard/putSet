@@ -1,19 +1,30 @@
 package com.revature.put_sets.repositories;
 
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.revature.put_sets.models.Set;
+import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
+import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;
+import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
+import software.amazon.awssdk.http.apache.ApacheHttpClient;
+import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class SetRepo {
 
-    private final DynamoDBMapper dbReader;
+    private final DynamoDbTable<Set> setTable;
 
     public SetRepo(){
-        dbReader = new DynamoDBMapper(AmazonDynamoDBClientBuilder.defaultClient());
+        DynamoDbClient db = DynamoDbClient.builder().httpClient(ApacheHttpClient.create()).build();
+        DynamoDbEnhancedClient dbClient = DynamoDbEnhancedClient.builder().dynamoDbClient(db).build();
+        setTable = dbClient.table("Sets", TableSchema.fromBean(Set.class));
     }
 
-    public void addSet(Set newSet){
-        dbReader.save(newSet);
+    public List<Set> getSets() {
+        return setTable.scan()
+                       .items()
+                       .stream()
+                       .collect(Collectors.toList());
     }
 
 }
