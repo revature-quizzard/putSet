@@ -2,15 +2,12 @@ package com.revature.put_sets.repositories;
 
 import com.revature.put_sets.models.Set;
 import com.revature.put_sets.models.SetDto;
-import com.revature.put_sets.models.Tag;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;
 import software.amazon.awssdk.enhanced.dynamodb.Key;
 import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
 import software.amazon.awssdk.http.apache.ApacheHttpClient;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
-
-import java.util.List;
 
 /**
  * The SetRepository Class is a database repository which provides CRUD operations on the Sets table.
@@ -45,11 +42,12 @@ public class SetRepository {
                 .build();
 
         Set targetSet = setTable.getItem(r -> r.key(key));
-        targetSet.setSet_name(updatedSetDto.getSet_name());
+        targetSet.setSetName(updatedSetDto.getSetName());
         targetSet.setTags(updatedSetDto.getTags());
-        targetSet.set_public(updatedSetDto.is_public());
+        targetSet.setPublic(updatedSetDto.isPublic());
 
         setTable.updateItem(targetSet);
+
         return targetSet;
 
     }

@@ -7,8 +7,8 @@ import java.util.List;
 @Data
 public class SetDto {
 
-    private String set_name;
+    private String setName;
     private List<Tag> tags;
-    private boolean is_public;
+    private boolean isPublic;
 
 }

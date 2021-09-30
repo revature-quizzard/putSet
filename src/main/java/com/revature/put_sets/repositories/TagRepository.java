@@ -41,8 +41,6 @@ public class TagRepository {
             if(foundT != null) { result.add(foundT); }
         }
 
-        System.out.println("TAGSRESULT: " + result);
-
         return result;
     }
 
