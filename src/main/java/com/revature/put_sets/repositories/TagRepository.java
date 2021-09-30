@@ -11,11 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TagRepo {
+/**
+ * The TagRepository Class is a database repository which provides CRUD operations on the Tags table.
+ */
+public class TagRepository {
 
     private final DynamoDbTable<Tag> tagTable;
 
-    public TagRepo() {
+    public TagRepository() {
 
         DynamoDbClient db = DynamoDbClient.builder().httpClient(ApacheHttpClient.create()).build();
         DynamoDbEnhancedClient dbClient = DynamoDbEnhancedClient.builder().dynamoDbClient(db).build();
@@ -24,18 +27,21 @@ public class TagRepo {
     }
 
     /**
-     * The findTags method is used to ensure that the list of Tags in the given Set exists in the set of predefined
-     * tags in the model.
-     * @param tagNames - The list of tag names that belong to the given Set.
-     * @return A list of tags from the model whose names matched tagNames.
+     * The findTags method retrieves any Tag objects that exist in the DB that have one of the tag names in the tags
+     * List as a List of Tag objects.
+     * @param tags - The list of tag names that belong to the given Set.
+     * @return A list of tags from the model whose names matched tags.
      */
-    public List<Tag> findTags(List<String> tagNames) {
-        List<Tag> tagQuery = tagNames.stream().map(e -> (new Tag(e))).collect(Collectors.toList());
+    public List<Tag> findTags(List<Tag> tags) {
+
         List<Tag> result = new ArrayList<>();
 
-        for(Tag t : tagQuery) {
-            result.add(tagTable.getItem(t));
+        for(Tag t : tags) {
+            Tag foundT = tagTable.getItem(t);
+            if(foundT != null) { result.add(foundT); }
         }
+
+        System.out.println("TAGSRESULT: " + result);
 
         return result;
     }

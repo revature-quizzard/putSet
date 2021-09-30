@@ -38,9 +38,4 @@ public class Tag {
         super();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        return this.tag_name.equals(o);
-    }
-
 }
