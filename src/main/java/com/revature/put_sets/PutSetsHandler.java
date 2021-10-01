@@ -46,6 +46,11 @@ public class PutSetsHandler implements RequestHandler<APIGatewayProxyRequestEven
             logger.log("RECEIVED EVENT: " + requestEvent + "\n");
             APIGatewayProxyResponseEvent responseEvent = new APIGatewayProxyResponseEvent();
 
+            Map<String, String> headers = new HashMap<>();
+            headers.put("Access-Control-Allow-Headers", "Content-Type,X-Amz-Date,Authorization");
+            headers.put("Access-Control-Allow-Origin", "*");
+            responseEvent.setHeaders(headers);
+
             try {
 
                 Map<String, String> pathParameters = requestEvent.getPathParameters();
