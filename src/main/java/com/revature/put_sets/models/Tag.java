@@ -5,6 +5,9 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbAttri
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
 
+/**
+ *
+ */
 @Data
 @DynamoDbBean
 public class Tag {
@@ -21,7 +24,7 @@ public class Tag {
         this.tagName = tagName;
     }
 
-    @DynamoDbAttribute("tag_color")
+    @DynamoDbAttribute("tagColor")
     public String getTagColor() {
         return tagColor;
     }

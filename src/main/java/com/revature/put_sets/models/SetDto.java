@@ -4,6 +4,9 @@ import lombok.Data;
 import java.util.List;
 
 
+/**
+ * The SetDto class represents
+ */
 @Data
 public class SetDto {
 

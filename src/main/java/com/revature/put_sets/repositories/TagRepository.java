@@ -9,7 +9,6 @@ import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * The TagRepository Class is a database repository which provides CRUD operations on the Tags table.

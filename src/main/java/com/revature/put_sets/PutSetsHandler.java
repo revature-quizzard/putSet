@@ -11,23 +11,32 @@ import com.revature.put_sets.exceptions.InvalidRequestException;
 import com.revature.put_sets.models.SetDto;
 import com.revature.put_sets.repositories.SetRepository;
 import com.revature.put_sets.repositories.TagRepository;
+import com.revature.put_sets.repositories.UserRepository;
 
 import java.util.Map;
 
+/**
+ * The PutSetsHandler class is a Java 8 AWS Lambda function to handle update operations on Set objects. This function
+ * occupies the RESTful PUT Request Method on the Set endpoint.
+ * @author Marwan Bataineh
+ */
 public class PutSetsHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
         private final TagRepository tagRepo;
         private final SetRepository setRepo;
+        private final UserRepository userRepo;
         private static final Gson mapper = new GsonBuilder().setPrettyPrinting().create();
 
         public PutSetsHandler() {
             tagRepo = new TagRepository();
             setRepo = new SetRepository();
+            userRepo = new UserRepository();
         }
 
-        public PutSetsHandler(TagRepository tagRepo, SetRepository setRepo) {
+        public PutSetsHandler(TagRepository tagRepo, SetRepository setRepo, UserRepository userRepo) {
             this.tagRepo = tagRepo;
             this.setRepo = setRepo;
+            this.userRepo = userRepo;
         }
 
         @Override
@@ -57,8 +66,8 @@ public class PutSetsHandler implements RequestHandler<APIGatewayProxyRequestEven
                     throw new InvalidRequestException("One or more tags do not exist in the Tags table.");
                 }
 
-
-                System.out.println("UPDATED SET: " + setRepo.updateSet(id, updatedSetDto));
+                setRepo.updateSet(id, updatedSetDto);
+                userRepo.updateUsersSets(id, updatedSetDto);
 
                 return responseEvent;
 

@@ -6,6 +6,9 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbParti
 
 import java.util.List;
 
+/**
+ *
+ */
 @Data
 @DynamoDbBean
 public class User {
@@ -102,15 +105,17 @@ public class User {
         this.favoriteSets = favoriteSets;
     }
 
-    //This class represents the fields of a Set that the User Document cares about storing (All but Cards)
+    /**
+     * This class represents the fields of a Set that the User Document cares about storing (All but Cards)
+     */
     @Data
     @DynamoDbBean
     public static class UserSetDoc{
         private String id;
-        private String set_name;
+        private String setName;
         private List<Tag> tags;
         private String author;
-        private boolean is_public;
+        private boolean isPublic;
         private int views = 0;
         private int plays = 0;
         private int studies = 0;
@@ -118,10 +123,10 @@ public class User {
 
         public UserSetDoc(Set set) {
             id = set.getId();
-            set_name = set.getSetName();
+            setName = set.getSetName();
             tags = set.getTags();
             author = set.getAuthor();
-            is_public = set.isPublic();
+            isPublic = set.isPublic();
         }
 
         public UserSetDoc() {

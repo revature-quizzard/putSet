@@ -7,7 +7,9 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbParti
 
 import java.util.List;
 
-//This class represents all the fields of a Set which are stored in DynamoDB
+/**
+ * The Set class is a POJO representing the Quizzard Set model.
+ */
 @Data
 @DynamoDbBean
 public class Set {
@@ -31,7 +33,7 @@ public class Set {
         this.id = id;
     }
 
-    @DynamoDbAttribute("set_name")
+    @DynamoDbAttribute("setName")
     public String getSetName() {
         return setName;
     }
@@ -58,7 +60,7 @@ public class Set {
         this.author = author;
     }
 
-    @DynamoDbAttribute("is_public")
+    @DynamoDbAttribute("isPublic")
     public boolean isPublic() {
         return isPublic;
     }
