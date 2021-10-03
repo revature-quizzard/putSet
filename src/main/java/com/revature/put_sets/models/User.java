@@ -7,7 +7,7 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbParti
 import java.util.List;
 
 /**
- *
+ * The User class is a POJO representing the Kwizzard User model.
  */
 @Data
 @DynamoDbBean

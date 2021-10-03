@@ -5,7 +5,8 @@ import java.util.List;
 
 
 /**
- * The SetDto class represents
+ * The SetDto class is a DTO which contains the fields within the Set model which can be updated by the Set author. This
+ * prevents illegal updates to Set objects.
  */
 @Data
 public class SetDto {

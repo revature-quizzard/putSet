@@ -45,9 +45,11 @@ public class UserRepository {
     }
 
     /**
-     *
-     * @param id
-     * @param updatedSetDto
+     * The updateUsersSets method searches for Users from the Users table that have one or more stored Sets as part of
+     * their data and updates those Sets with the new information contained within updatedSetDto. This is done to ensure
+     * referential integrity between the standalone Sets, and references to them.
+     * @param id - The id of the Set that has been updated.
+     * @param updatedSetDto - An object containing the updated fields of the Set that was updated.
      */
     public void updateUsersSets(String id, SetDto updatedSetDto) {
 

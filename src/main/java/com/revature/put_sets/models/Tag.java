@@ -6,7 +6,7 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
 
 /**
- *
+ * The Tag class is a POJO representing the Qwizard Tag model.
  */
 @Data
 @DynamoDbBean
