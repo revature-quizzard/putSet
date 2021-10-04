@@ -13,6 +13,7 @@ import com.revature.put_sets.repositories.SetRepository;
 import com.revature.put_sets.repositories.TagRepository;
 import com.revature.put_sets.repositories.UserRepository;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -45,6 +46,11 @@ public class PutSetsHandler implements RequestHandler<APIGatewayProxyRequestEven
             LambdaLogger logger = context.getLogger();
             logger.log("RECEIVED EVENT: " + requestEvent + "\n");
             APIGatewayProxyResponseEvent responseEvent = new APIGatewayProxyResponseEvent();
+
+            Map<String, String> headers = new HashMap<>();
+            headers.put("Access-Control-Allow-Headers", "Content-Type,X-Amz-Date,Authorization");
+            headers.put("Access-Control-Allow-Origin", "*");
+            responseEvent.setHeaders(headers);
 
             try {
 
