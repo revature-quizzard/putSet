@@ -9,11 +9,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.revature.put_sets.exceptions.InvalidRequestException;
 import com.revature.put_sets.models.SetDto;
+import com.revature.put_sets.models.Tag;
 import com.revature.put_sets.repositories.SetRepository;
 import com.revature.put_sets.repositories.TagRepository;
 import com.revature.put_sets.repositories.UserRepository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -64,16 +66,12 @@ public class PutSetsHandler implements RequestHandler<APIGatewayProxyRequestEven
                 System.out.println("ID: " + id);
 
                 SetDto updatedSetDto = mapper.fromJson(requestEvent.getBody(), SetDto.class);
-                System.out.println("TAGS: " + updatedSetDto.getTags());
-                if (!updatedSetDto.getTags().isEmpty()
-                        &&
-                        !tagRepo.findTags(updatedSetDto.getTags())
-                                .containsAll(updatedSetDto.getTags())) {
-                    throw new InvalidRequestException("One or more tags do not exist in the Tags table.");
-                }
 
-                setRepo.updateSet(id, updatedSetDto);
-                userRepo.updateUsersSets(id, updatedSetDto);
+                List<Tag> trans_Tags = tagRepo.findTags(updatedSetDto.getTags());
+                System.out.println("TAGS: " + trans_Tags);
+
+                setRepo.updateSet(id, updatedSetDto, trans_Tags);
+                userRepo.updateUsersSets(id, updatedSetDto, trans_Tags);
 
                 return responseEvent;
 

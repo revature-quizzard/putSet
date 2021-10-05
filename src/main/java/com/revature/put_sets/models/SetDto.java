@@ -12,7 +12,7 @@ import java.util.List;
 public class SetDto {
 
     private String setName;
-    private List<Tag> tags;
+    private List<String> tags;
     private boolean isPublic;
 
 }

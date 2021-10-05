@@ -2,12 +2,15 @@ package com.revature.put_sets.repositories;
 
 import com.revature.put_sets.models.Set;
 import com.revature.put_sets.models.SetDto;
+import com.revature.put_sets.models.Tag;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;
 import software.amazon.awssdk.enhanced.dynamodb.Key;
 import software.amazon.awssdk.enhanced.dynamodb.TableSchema;
 import software.amazon.awssdk.http.apache.ApacheHttpClient;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
+
+import java.util.List;
 
 /**
  * The SetRepository Class is a database repository which provides CRUD operations on the Sets table.
@@ -35,7 +38,7 @@ public class SetRepository {
      * @param updatedSetDto - The DTO containing updated (or simply eligible for updating operations) fields.
      * @return The updated Set object.
      */
-    public Set updateSet(String id, SetDto updatedSetDto) {
+    public Set updateSet(String id, SetDto updatedSetDto, List<Tag> tags) {
 
         Key key = Key.builder()
                 .partitionValue(id)
@@ -43,7 +46,7 @@ public class SetRepository {
 
         Set targetSet = setTable.getItem(r -> r.key(key));
         targetSet.setSetName(updatedSetDto.getSetName());
-        targetSet.setTags(updatedSetDto.getTags());
+        targetSet.setTags(tags);
         targetSet.setPublic(updatedSetDto.isPublic());
 
         setTable.updateItem(targetSet);

@@ -1,6 +1,7 @@
 package com.revature.put_sets.repositories;
 
 import com.revature.put_sets.models.SetDto;
+import com.revature.put_sets.models.Tag;
 import com.revature.put_sets.models.User;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;
@@ -51,7 +52,7 @@ public class UserRepository {
      * @param id - The id of the Set that has been updated.
      * @param updatedSetDto - An object containing the updated fields of the Set that was updated.
      */
-    public void updateUsersSets(String id, SetDto updatedSetDto) {
+    public void updateUsersSets(String id, SetDto updatedSetDto, List<Tag> tags) {
 
         List<User> users = getAllUsers();
 
@@ -62,7 +63,7 @@ public class UserRepository {
             for (User.UserSetDoc set : u.getCreatedSets()) {
                 if (set.getId().equals(id)) {
                     set.setSetName(updatedSetDto.getSetName());
-                    set.setTags(updatedSetDto.getTags());
+                    set.setTags(tags);
                     set.setPublic(updatedSetDto.isPublic());
                 }
             }
@@ -70,7 +71,7 @@ public class UserRepository {
             for (User.UserSetDoc set : u.getFavoriteSets()) {
                 if (set.getId().equals(id)) {
                     set.setSetName(updatedSetDto.getSetName());
-                    set.setTags(updatedSetDto.getTags());
+                    set.setTags(tags);
                     set.setPublic(updatedSetDto.isPublic());
                 }
             }
